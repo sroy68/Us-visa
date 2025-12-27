@@ -4,7 +4,7 @@ const slotsEl = document.getElementById('slots');
 
 // এখন ডেমো হিসেবে public JSON API ব্যবহার করছি
 // পরে এখানে তোমার real ustavelDocs scraper/API এর URL বসাবে
-const DEMO_API = 'https://us-visa-api.onrender.com/slots';
+const DEMO_API = 'https://usvisa-73i9.onrender.com/slots';
 
 async function loadSlots() {
   statusEl.textContent = 'Loading demo data...';
