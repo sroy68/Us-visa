@@ -2,18 +2,17 @@
 <html>
 <head>
   <style>
-    body { width: 320px; padding: 15px; font-family: Arial; }
-    h3 { color: #2196F3; text-align: center; }
-    .slot.available { background: #4CAF50; color: white; padding: 12px; margin: 5px 0; border-radius: 8px; }
-    .slot.booked { background: #f44336; color: white; padding: 12px; margin: 5px 0; border-radius: 8px; }
-    #slots { max-height: 300px; overflow-y: auto; }
-    .status { text-align: center; color: #666; font-size: 12px; }
+    body { width: 300px; padding: 20px; font-family: system-ui; }
+    .status { font-size: 24px; font-weight: bold; }
+    .green { color: #10B981; }
+    .slots { max-height: 200px; overflow-y: auto; }
+    .slot { padding: 8px; margin: 4px 0; border-radius: 8px; }
+    .available { background: #10B98120; }
   </style>
 </head>
 <body>
-  <h3>🎯 US Visa Slots LIVE</h3>
-  <div id="slots">🔄 5sec refresh...</div>
-  <div class="status" id="status"></div>
+  <div class="status green">🎯 LIVE</div>
+  <div id="slots">Loading...</div>
   <script src="popup.js"></script>
 </body>
 </html>
