@@ -1,21 +1,21 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
-const PORT = process.env.PORT || 3000;
 
-// simple demo data (পরে এখানে real slot ডাটা বসাবে)
-const demoSlots = [
-  { id: 1, date: '2025-01-10', location: 'Kolkata', type: 'F1' },
-  { id: 2, date: '2025-01-15', location: 'Mumbai',  type: 'B1/B2' },
-  { id: 3, date: '2025-01-20', location: 'Delhi',   type: 'H1B' }
-];
+app.use(cors());
+app.use(express.json());
 
 app.get('/slots', (req, res) => {
+  const demoSlots = [
+    {"date":"2025-12-28","location":"Kolkata","time":"09:00","status":"Available"},
+    {"date":"2025-12-28","location":"Kolkata","time":"11:00","status":"Available"},
+    {"date":"2025-12-28","location":"Delhi","time":"10:00","status":"Booked"},
+    {"date":"2025-12-29","location":"Mumbai","time":"14:00","status":"Available"}
+  ];
   res.json(demoSlots);
 });
 
-app.get('/', (req, res) => {
-  res.send('US Visa slot demo API is running');
-});
-
 const PORT = process.env.PORT || 10000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
