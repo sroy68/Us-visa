@@ -1,14 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "US Visa Slot Demo",
-  "version": "0.0.1",
-  "description": "Simple popup that shows latest US visa slot data from demo API.",
-  "action": {
-    "default_popup": "popup.html",
-    "default_title": "US Visa Slots"
-  },
-  "permissions": [],
-  "host_permissions": [
-    "https://jsonplaceholder.typicode.com/*"
-  ]
+  "name": "US Visa Slot Tracker",
+  "version": "2.0",
+  "action": { "default_popup": "popup.html" },
+  "permissions": ["notifications"]
 }

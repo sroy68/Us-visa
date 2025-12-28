@@ -1,41 +1,38 @@
-// popup.js - 5 SECOND AUTO REFRESH
 document.addEventListener('DOMContentLoaded', function() {
   const slotsDiv = document.getElementById('slots');
+  const statusDiv = document.getElementById('status');
   
   async function updateSlots() {
+    statusDiv.textContent = '🔄 Checking...';
     try {
-      slotsDiv.innerHTML = '🔄 Checking slots...';
-      
       const response = await fetch('https://usvisa-73i9.onrender.com/slots');
       const data = await response.json();
       
       if (data.success && data.slots.length > 0) {
         slotsDiv.innerHTML = data.slots.map(slot => 
           `<div class="slot ${slot.status === 'Available' ? 'available' : 'booked'}">
-            🚨 ${slot.location} - ${slot.time} - <strong>${slot.status}</strong>
+            📍 ${slot.location}<br>
+            🕒 ${slot.time}<br>
+            <strong>${slot.status}</strong>
           </div>`
         ).join('');
         
-        // Chrome notification for available slots
         if (data.slots.some(slot => slot.status === 'Available')) {
           chrome.notifications.create({
             type: 'basic',
             iconUrl: 'icon.png',
-            title: '🎉 VISA SLOT FOUND!',
-            message: `${data.slots[0].location} ${data.slots[0].time} Available!`
+            title: '🎉 SLOT AVAILABLE!',
+            message: `${data.slots[0].location} - ${data.slots[0].time}`
           });
         }
-      } else {
-        slotsDiv.innerHTML = 'No slots available';
+        statusDiv.textContent = `Updated: ${new Date().toLocaleTimeString()}`;
       }
     } catch (error) {
-      slotsDiv.innerHTML = 'Error checking slots';
+      slotsDiv.innerHTML = '❌ API Error';
+      statusDiv.textContent = 'Connection failed';
     }
   }
   
-  // 5 SECOND AUTO REFRESH ⚡
   setInterval(updateSlots, 5000);
-  
-  // Initial load
   updateSlots();
 });
