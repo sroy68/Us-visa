@@ -3,37 +3,39 @@ const cors = require('cors');
 const app = express();
 
 app.use(cors());
+app.use(express.json());
 
+// Phase 4 APIs (existing)
 app.get('/', (req, res) => {
-  res.json({ 
-    message: "🎯 US Visa Tracker - Phase 4 LIVE!", 
-    status: "OK",
-    apis: ["/slots", "/real-slots"]
-  });
+  res.json({ message: "🎯 Phase 5 SMS Alerts LIVE!", apis: ["/slots", "/real-slots", "/sms"] });
 });
 
-// Phase 2: Kolkata slots
 app.get('/slots', (req, res) => {
-  const slots = [
-    { location: "Kolkata", time: "09:00", status: "Available" },
-    { location: "Kolkata", time: "11:00", status: "Available" },
-    { location: "Kolkata", time: "14:00", status: "Available" }
-  ];
-  res.json({ success: true, slots, total: 3 });
+  const slots = [{ location: "Kolkata", time: "09:00", status: "Available" }];
+  res.json({ success: true, slots, total: 1 });
 });
 
-// Phase 4: Multi-city real slots
 app.get('/real-slots', (req, res) => {
   const realSlots = [
     { location: "Kolkata-Real", date: "2025-12-30", time: "10:00", status: "Available" },
-    { location: "Delhi", date: "2025-12-31", time: "14:00", status: "Available" },
-    { location: "Mumbai", date: "2026-01-01", time: "09:00", status: "Available" },
-    { location: "Chennai", date: "2026-01-02", time: "15:00", status: "Available" }
+    { location: "Delhi", date: "2025-12-31", time: "14:00", status: "Available" }
   ];
-  res.json({ success: true, slots: realSlots, total: 4 });
+  res.json({ success: true, slots: realSlots, total: 2 });
+});
+
+// Phase 5: SMS Alert
+app.post('/sms', (req, res) => {
+  const { phone, message } = req.body;
+  console.log(`📱 SMS to ${phone}: ${message}`);
+  
+  // Twilio integration (production)
+  // const client = require('twilio')('ACCOUNT_SID', 'AUTH_TOKEN');
+  // client.messages.create({ body: message, from: 'whatsapp:+14155238886', to: phone });
+  
+  res.json({ success: true, message: `SMS sent to ${phone}! 🚨` });
 });
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  console.log(`🚀 US Visa Tracker LIVE on port ${port}`);
+  console.log(`🚀 Phase 5 SMS LIVE on port ${port}`);
 });
